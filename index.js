@@ -6,25 +6,35 @@ const port = process.env.PORT || 3000;
 
 const { Game } = require('./game.js');
 
-app.use(express.static('public'))
+app.use(express.static('public'));
 
 var games = [];
 
 io.on('connection', (socket) => {
+  //console.log(socket.id +  ' connected');
 
-  console.log(socket.id +  ' connected');
   socket.on('disconnect', () => {
-    console.log(socket.id +  ' disconnected');
+    //console.log(socket.id +  ' disconnected');
   });
 
-  socket.on('connectPlayer', connectPlayer)
+  socket.on('newGame', (payload) => {
+    console.log(payload.gameId);
+    var id = createNewGame(payload.gameId);
+    socket.emit('newGameReady', {gameId: id});
+  });
+
+  //socket.on('connectPlayer', connectPlayer);
 });
 
 function connectPlayer(socket){
-  console.log(socket.playerName + " started");
-    let game = new Game();
-    game.start();
-    games.push(game);
+    game.addPlayer(socket.playerName);
+}
+
+function createNewGame(gameId){
+  let game = new Game(gameId);
+  game.start();
+  games.push(game);
+  return game.getId();
 }
 
 http.listen(port, () => {
