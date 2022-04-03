@@ -4,11 +4,10 @@
         <title>Az oldal neve</title>
         <script src="/socket.io/socket.io.js"></script>
         <script src="/client.js"></script>
+        <script src="jquery-3.6.0.min.js"></script>
     </head>
-    <body>       
-        <button onclick="hallo()">Start</button>
-        <script>
-            var socket = io();
-          </script>
+    <body>
+        <input type="text" id="playerId">    
+        <button onclick="hallo(document.getElementById('playerId').value)">Start</button>
     </body>
 </html>
