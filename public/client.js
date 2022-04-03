@@ -13,7 +13,11 @@ socket.on('newGameReady', (payload) => {
 });
 
 $('#new-game-btn').on('click', function(){
-    newGame($('#game-id').val());
+    if($('#game-id').val().length > 0){
+        $('#new-game-menu').hide();
+        newGame($('#game-id').val());
+        $('#player-id-menu').show();
+    }       
 })
 
 
@@ -24,4 +28,6 @@ $('#start-btn').on('click', function() {
     newGame(name);
 })
 
-
+$(function() {
+    $('#player-id-menu').hide();
+});

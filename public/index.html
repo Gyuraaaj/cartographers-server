@@ -2,10 +2,19 @@
 <html>
     <head>
         <title>Az oldal neve</title>
+        <link rel="stylesheet" href="game.css">
     </head>
     <body>
-        <input type="text" id="game-id">
-        <button id="new-game-btn">Új játék</button>
+        <div id="content" class="center"> 
+            <div id="new-game-menu">
+                <input type="text" id="game-id">
+                <button id="new-game-btn">Új játék</button>
+            </div>
+            <div id="player-id-menu">
+                <input type="text" id="player-id">
+                <button id="player-id-btn">Királyság neve</button>
+            </div>
+        </div>
         <!--<input type="text" id="playerId">    
         <button id="start-btn")>Start</button> -->
         <script src="/socket.io/socket.io.js"></script>
