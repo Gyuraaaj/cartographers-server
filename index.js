@@ -8,14 +8,24 @@ const { Game } = require('./game.js');
 
 app.use(express.static('public'))
 
+var games = [];
+
 io.on('connection', (socket) => {
+
   console.log(socket.id +  ' connected');
-  let game = new Game();
-  game.start();
   socket.on('disconnect', () => {
     console.log(socket.id +  ' disconnected');
   });
+
+  socket.on('connectPlayer', connectPlayer)
 });
+
+function connectPlayer(socket){
+  console.log(socket.playerName + " started");
+    let game = new Game();
+    game.start();
+    games.push(game);
+}
 
 http.listen(port, () => {
   console.log('listening on *:3000');
