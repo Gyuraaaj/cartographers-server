@@ -1,20 +1,22 @@
-const { Player } = require("./player");
+import { Player } from "./player.js"
 
-exports.Game = function(gameId) {
-    var id = gameId; 
-    var players = [];
-
-    this.start = function() {
-        console.log("Új játék indítva, név: " + gameId)
+export class Game {
+    constructor(gameId) {
+        this.gameId = gameId;
+        this.players = [];
     }
 
-    this.addPlayer = function(id) {
+    start(){
+        console.log("Új játék indítva, név: " + this.gameId)
+    }
+
+    addPlayer(id) {
         var p = new Player(id);
-        players.push(p);
+        this.players.push(p);
         console.log(id + " csatlakozott");
     }
 
-    this.getId = function() {
-        return id;
+    getId() {
+        return this.id;
     }
 }

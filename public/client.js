@@ -1,6 +1,6 @@
 const socket = io.connect('http://localhost:3000/');
 
-function hallo(name){
+function addPlayer(name){
     socket.emit('connectPlayer', {playerName: name});
 }
 
@@ -20,12 +20,10 @@ $('#new-game-btn').on('click', function(){
     }       
 })
 
-
-$('#start-btn').on('click', function() {
-    console.log("A");
-    var name = $('#playerId').val();
-    console.log(name);
-    newGame(name);
+$('#add-player-btn').on('click', function() {
+    var name = $('#player-id').val();
+    console.log(name)
+    addPlayer(name);
 })
 
 $(function() {

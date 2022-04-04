@@ -1,10 +1,12 @@
-const express = require('express')
-const app = express();
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
-const port = process.env.PORT || 3000;
+import { Server } from 'socket.io';
+import { createServer } from 'http';
+import express from 'express';
+import { Game } from './game.js'
 
-const { Game } = require('./game.js');
+const app = express(); 
+const http = createServer(app); 
+const io = new Server(http);
+const port = process.env.PORT || 3000;
 
 app.use(express.static('public'));
 
@@ -23,11 +25,14 @@ io.on('connection', (socket) => {
     socket.emit('newGameReady', {gameId: id});
   });
 
-  //socket.on('connectPlayer', connectPlayer);
+  socket.on('connectPlayer', (payload) => {
+    console.log(payload.playerName)
+    connectPlayer(payload.playerName)
+  });
 });
 
-function connectPlayer(socket){
-    game.addPlayer(socket.playerName);
+function connectPlayer(playerName){
+    games[0].addPlayer(playerName);
 }
 
 function createNewGame(gameId){
