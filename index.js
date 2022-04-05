@@ -1,7 +1,8 @@
 import { Server } from 'socket.io';
 import { createServer } from 'http';
 import express from 'express';
-import { Game } from './game.js'
+import { Game } from './game.js';
+import  Board  from './boards.js';
 
 const app = express(); 
 const http = createServer(app); 
@@ -13,21 +14,19 @@ app.use(express.static('public'));
 var games = [];
 
 io.on('connection', (socket) => {
-  //console.log(socket.id +  ' connected');
 
   socket.on('disconnect', () => {
-    //console.log(socket.id +  ' disconnected');
   });
 
-  socket.on('newGame', (payload) => {
-    console.log(payload.gameId);
+  socket.on('newGameRequest', (payload) => {
     var id = createNewGame(payload.gameId);
-    socket.emit('newGameReady', {gameId: id});
+    console.log(id);
+    socket.emit('newGameReady', {gameId: id, board: Board.board});
   });
 
-  socket.on('connectPlayer', (payload) => {
-    console.log(payload.playerName)
-    connectPlayer(payload.playerName)
+  socket.on('connectPlayerRequest', (payload) => {
+    connectPlayer(payload.playerName);
+    socket.emit('connectPlayerReady');
   });
 });
 

@@ -17,6 +17,6 @@ export class Game {
     }
 
     getId() {
-        return this.id;
+        return this.gameId;
     }
 }
