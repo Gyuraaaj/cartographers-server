@@ -33,6 +33,9 @@ function drawboard() {
                     break;
                 case 1:
                     $(block).addClass('mountainBlock');
+                    break;
+                case 2:
+                    $(block).addClass('shrineBlock');
                     break; 
             }
             board.append(block);
@@ -46,14 +49,19 @@ $('#new-game-btn').on('click', function(){
         newGame($('#game-id').val());
         $('#player-id-menu').show();
     }       
-})
+});
 
 $('#add-player-btn').on('click', function() {
     var name = $('#player-id').val();
     console.log(name)
     addPlayer(name);
-})
+});
+
+$(document).on('click', '.emptyBlock', function() {
+    $(this).removeClass('emptyBlock');
+    $(this).addClass('farmBlock');
+});
 
 $(function() {
-    $('#player-id-menu').hide();
+    $('#player-id-menu').hide();    
 });

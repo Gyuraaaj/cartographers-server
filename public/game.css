@@ -6,25 +6,44 @@ body{
 }
 
 .block{
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
+    filter: brightness(100%);
 }
 
 .mountainBlock{
-    border: 1px solid brown;
     background-image: url('images/mountain.png');
-    background-size: cover;   
+    background-size: cover;
+    opacity: 100%;
+}
+
+.shrineBlock{
+    background-image: url('images/shrine.png');
+    background-size: cover;
+    opacity: 100%;
+}
+
+.farmBlock{
+    background-image: url('images/farm.png');
+    background-size: cover;
+    opacity: 100%;   
 }
 
 .emptyBlock{
-    border: 1px solid yellow;
-    background-color: blanchedalmond;
+    background-image: url('images/empty.png');
+    background-size: cover;
+    opacity: 30%;
 }
 
 #board{
-    border:1px solid #462921;
     margin: 0 auto;
     display: grid;
-    grid-gap: 0;
+    grid-gap: 1px;
     grid-template-columns: repeat(11, 1fr);
+    background-image: url('images/background.jpg');
+    background-size: cover; 
+}
+
+.block:hover {
+    filter: brightness(70%);
 }
